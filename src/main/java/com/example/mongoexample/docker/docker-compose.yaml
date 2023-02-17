@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_USERNAME: mongo
+      MONGO_PASSWORD: root
+    ports:
+      - "27017:27017"
+  db:
+    image: postgres:9.3
+    restart: always
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
