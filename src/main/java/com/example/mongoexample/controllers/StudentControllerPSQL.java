@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("api/psql/students")
 @AllArgsConstructor
-public class StudentController {
+public class StudentControllerPSQL {
 
     private StudentServiceImplPostgreSQL studentServiceImplPostgreSQL;
 
@@ -20,9 +20,9 @@ public class StudentController {
         return ResponseEntity.ok().body(studentServiceImplPostgreSQL.getStudent(id));
     }
 
-    @PutMapping("/save")
-    public ResponseEntity<?> putStudent(@RequestBody StudentPutDTO studentPutDTO) {
-        studentServiceImplPostgreSQL.putStudent(studentPutDTO);
+    @PutMapping("/save/{id}")
+    public ResponseEntity<?> putStudent(@RequestBody StudentPutDTO studentPutDTO, @PathVariable Long id) {
+        studentServiceImplPostgreSQL.putStudent(studentPutDTO, id);
         return ResponseEntity.ok().build();
     }
 

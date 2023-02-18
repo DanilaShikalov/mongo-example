@@ -12,5 +12,5 @@ public interface StudentService {
 
     void deleteStudent(Long id);
 
-    void putStudent(StudentPutDTO studentPutDTO);
+    void putStudent(StudentPutDTO studentPutDTO, Long id);
 }

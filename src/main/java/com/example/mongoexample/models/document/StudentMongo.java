@@ -1,8 +1,5 @@
 package com.example.mongoexample.models.document;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class StudentMongo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private String name;
     private String surname;
     private Long phone;

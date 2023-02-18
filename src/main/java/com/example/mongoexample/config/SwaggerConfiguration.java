@@ -16,7 +16,7 @@ import java.util.List;
 
 @Configuration
 public class SwaggerConfiguration {
-    public static final String DEFAULT_INCLUDE_PATTERN = "students/*";
+    public static final String DEFAULT_INCLUDE_PATTERN = "api/*";
 
     @Bean
     public Docket swaggerSpringfoxDocket() {

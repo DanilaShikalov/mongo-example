@@ -34,7 +34,9 @@ public class StudentServiceImplPostgreSQL implements StudentService {
     }
 
     @Override
-    public void putStudent(StudentPutDTO studentPutDTO) {
-        studentRepositoryPostgreSQL.save(mapperStudent.putToEntity(studentPutDTO));
+    public void putStudent(StudentPutDTO studentPutDTO, Long id) {
+        Student student = mapperStudent.putToEntity(studentPutDTO);
+        student.setId(id);
+        studentRepositoryPostgreSQL.save(student);
     }
 }

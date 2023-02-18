@@ -1,32 +1,39 @@
 package com.example.mongoexample.services.StudentImpl;
 
+import com.example.mongoexample.exception.StudentNotFoundException;
+import com.example.mongoexample.mapper.MapperStudent;
+import com.example.mongoexample.models.document.StudentMongo;
 import com.example.mongoexample.models.dto.student.StudentGetDTO;
 import com.example.mongoexample.models.dto.student.StudentPostDTO;
 import com.example.mongoexample.models.dto.student.StudentPutDTO;
+import com.example.mongoexample.repository.StudentRepositoryMongoDB;
 import com.example.mongoexample.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
-public class StudentServiceImplMongoDB implements StudentService {
-    @Override
-    public StudentGetDTO getStudent(Long id) {
-        return null;
+public class StudentServiceImplMongoDB {
+    private StudentRepositoryMongoDB studentRepositoryMongoDB;
+    private MapperStudent mapperStudent;
+    public StudentGetDTO getStudent(String id) {
+        StudentMongo student = studentRepositoryMongoDB.findById(id).orElseThrow(StudentNotFoundException::new);
+        return mapperStudent.documentToGet(student);
     }
 
-    @Override
     public void postStudent(StudentPostDTO studentPostDTO) {
-
+        studentRepositoryMongoDB.save(mapperStudent.postToDocument(studentPostDTO));
     }
 
-    @Override
-    public void deleteStudent(Long id) {
-
+    public void deleteStudent(String id) {
+        studentRepositoryMongoDB.deleteById(id);
     }
 
-    @Override
-    public void putStudent(StudentPutDTO studentPutDTO) {
-
+    public void putStudent(StudentPutDTO studentPutDTO, String id) {
+        StudentMongo student = mapperStudent.putToDocument(studentPutDTO);
+        student.setId(id);
+        studentRepositoryMongoDB.save(student);
     }
 }
